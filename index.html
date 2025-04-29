@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       height: 100vh;
-      background-color: #d0f0c0; /* Fondo verde clarito */
+      background-color: #d0f0c0; 
       font-family: 'Poppins', sans-serif;
       display: flex;
       flex-direction: column;
@@ -47,18 +47,22 @@
     #si {
       background-color: #4caf50;
       color: white;
-      position: relative;
-      z-index: 1;
     }
 
     #no {
       background-color: #f44336;
       color: white;
+      position: relative;
+      transition: left 0.3s, top 0.3s; 
+    }
+
+    #mensaje {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #2e7d32;
+      display: none; 
       position: absolute;
-      z-index: 2;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      bottom: 20px; 
     }
   </style>
 </head>
@@ -68,28 +72,44 @@
 
   <div class="botones">
     <button id="si" onclick="aceptar()">Sí</button>
-    <button id="no" onmouseover="mover()" ontouchstart="mover()">No</button>
+    <button id="no" onclick="mover()">No</button>
   </div>
+
+  <div id="mensaje">Era obviooooo, quien no quiere a este chulo</div> 
 
   <script>
     function mover() {
       const no = document.getElementById('no');
       const padding = 50; 
 
+      
+      const movementLimit = 400; 
+
       const maxLeft = window.innerWidth - no.offsetWidth - padding;
       const maxTop = window.innerHeight - no.offsetHeight - padding;
 
-      let randomLeft = Math.random() * maxLeft + padding / 2;
-      let randomTop = Math.random() * maxTop + padding / 2;
+      let randomLeft = Math.random() * movementLimit;
+      let randomTop = Math.random() * movementLimit;
 
-      // Movemos el botón dentro de los límites visibles
+      const mensaje = document.getElementById('mensaje');
+      const mensajeHeight = mensaje.offsetHeight;
+
+
+      if (randomTop + no.offsetHeight + mensajeHeight > window.innerHeight) {
+        randomTop = window.innerHeight - no.offsetHeight - mensajeHeight - 10; 
+      }
+
+      randomLeft = Math.min(randomLeft, maxLeft);
+      randomTop = Math.min(randomTop, maxTop);
+
       no.style.left = `${randomLeft}px`;
       no.style.top = `${randomTop}px`;
       no.style.transform = 'translate(0, 0)';
     }
 
     function aceptar() {
-      alert("ya lo sabia todas me dicen lo mismo jajja");
+      const mensaje = document.getElementById('mensaje');
+      mensaje.style.display = 'block'; 
     }
   </script>
 
