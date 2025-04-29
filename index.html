@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Me quieres?</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #d0f0c0; /* Fondo verde clarito */
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      color: #2e7d32;
+      font-size: 2em;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .botones {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    button {
+      padding: 15px 50px;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+    #si {
+      background-color: #4caf50;
+      color: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    #no {
+      background-color: #f44336;
+      color: white;
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>¿Me quieres? </h1>
+
+  <div class="botones">
+    <button id="si" onclick="aceptar()">Sí</button>
+    <button id="no" onmouseover="mover()" ontouchstart="mover()">No</button>
+  </div>
+
+  <script>
+    function mover() {
+      const no = document.getElementById('no');
+      const padding = 50; 
+
+      const maxLeft = window.innerWidth - no.offsetWidth - padding;
+      const maxTop = window.innerHeight - no.offsetHeight - padding;
+
+      let randomLeft = Math.random() * maxLeft + padding / 2;
+      let randomTop = Math.random() * maxTop + padding / 2;
+
+      // Movemos el botón dentro de los límites visibles
+      no.style.left = `${randomLeft}px`;
+      no.style.top = `${randomTop}px`;
+      no.style.transform = 'translate(0, 0)';
+    }
+
+    function aceptar() {
+      alert("ya lo sabia todas me dicen lo mismo jajja");
+    }
+  </script>
+
+</body>
+</html>
